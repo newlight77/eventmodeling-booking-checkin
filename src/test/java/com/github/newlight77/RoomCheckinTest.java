@@ -13,8 +13,9 @@ public class RoomCheckinTest {
     public void should_process_room_checkin_event() {
 
         final CheckinCommand.CheckinCommandBuilder builder = CheckinCommand.builder();
-        final RoomRepository repo = new RoomRepository();
-        final CheckinRoomHandler handler = new CheckinRoomHandler(repo);
+        final RoomWriteRepository writeRepository = new RoomWriteRepository();
+        final RoomReadRepository readRepository = new RoomReadRepository();
+        final CheckinRoomHandler handler = new CheckinRoomHandler(writeRepository);
 
         Beha4j
             .scenario("should_process_room_checkin_event")
@@ -30,7 +31,7 @@ public class RoomCheckinTest {
                 handler.checkin(builder.build());
             })
             .then("a booking event is created", name -> {
-                String event = repo.getAll();
+                String event = readRepository.getAll();
                 assertThat(event).contains("\"checkinTime\":\"2020-01-30T10:11:21\"");
                 assertThat(event).contains("\"roomNumber\":\"12312\"");
                 assertThat(event).contains("\"reservationNumber\":\"1234556\"");

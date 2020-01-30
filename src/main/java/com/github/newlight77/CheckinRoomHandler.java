@@ -2,10 +2,10 @@ package com.github.newlight77;
 
 public class CheckinRoomHandler {
 
-    private RoomRepository roomRepository;
+    private RoomWriteRepository roomWriteRepository;
 
-    public CheckinRoomHandler(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
+    public CheckinRoomHandler(RoomWriteRepository roomRepository) {
+        this.roomWriteRepository = roomRepository;
     }
 
     public void checkin(CheckinCommand command) {
@@ -16,6 +16,6 @@ public class CheckinRoomHandler {
                 .badgeNumber(command.getBadgeNumber())
                 .reservationNumber(command.getReservationNumber())
                 .build();
-        this.roomRepository.save(event);
+        this.roomWriteRepository.save(event);
     }
 }

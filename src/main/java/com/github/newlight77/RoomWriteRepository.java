@@ -2,7 +2,7 @@ package com.github.newlight77;
 
 import org.json.simple.JSONObject;
 
-public class RoomRepository {
+public class RoomWriteRepository {
 
     public void save(RoomCheckinCompleted event) {
         JSONObject json = new JSONObject();
@@ -12,10 +12,6 @@ public class RoomRepository {
         json.put("roomNumber", event.getRoomNumber());
         json.put("reservationNumber", event.getReservationNumber());
         new RoomFileBased().writeJson(json);
-    }
-
-    public String getAll() {
-        return new RoomFileBased().readJson().toString();
     }
 
 }
