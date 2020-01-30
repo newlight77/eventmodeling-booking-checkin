@@ -11,7 +11,7 @@ public class RoomWriteRepository {
         json.put("checkinTime", event.getCheckinTime());
         json.put("roomNumber", event.getRoomNumber());
         json.put("reservationNumber", event.getReservationNumber());
-        new RoomFileBased().writeJson(json);
+        new RoomFileBased().writeJson(event.getRoomNumber(), json);
     }
 
 }

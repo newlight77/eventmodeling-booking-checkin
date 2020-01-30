@@ -12,20 +12,20 @@ import java.nio.file.Paths;
 
 public class RoomFileBased {
 
-    public void writeJson(JSONObject json) {
+    public void writeJson(String roomNumber, JSONObject json) {
         FileWriter writer = null;
         try {
-            writer = new FileWriter("room.json");
+            writer = new FileWriter("/home/events/checkin/rooms-" + roomNumber + ".json");
             writer.write(json.toJSONString());
             writer.close();
         } catch (IOException e) {
         }
     }
 
-    public String readJson() {
+    public String readJson(String roomNumber) {
         FileReader reader = null;
         try {
-            String json = Files.readString(Paths.get("room.json"));
+            String json = Files.readString(Paths.get("/home/events/checkin/rooms-" + roomNumber + ".json"));
             return new JSONParser().parse(json).toString();
         } catch (IOException | ParseException e) {
             e.printStackTrace();

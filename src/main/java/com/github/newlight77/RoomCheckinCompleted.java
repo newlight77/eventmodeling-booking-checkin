@@ -3,8 +3,6 @@ package com.github.newlight77;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 public class RoomCheckinCompleted {

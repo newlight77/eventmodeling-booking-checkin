@@ -2,8 +2,8 @@ package com.github.newlight77;
 
 public class RoomReadRepository {
 
-    public String getAll() {
-        return new RoomFileBased().readJson().toString();
+    public String getCheckin(String roomNumber) {
+        return new RoomFileBased().readJson(roomNumber).toString();
     }
 
 }

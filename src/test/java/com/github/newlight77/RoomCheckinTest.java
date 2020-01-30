@@ -31,7 +31,7 @@ public class RoomCheckinTest {
                 handler.checkin(builder.build());
             })
             .then("a booking event is created", name -> {
-                String event = readRepository.getAll();
+                String event = readRepository.getCheckin("12312");
                 assertThat(event).contains("\"checkinTime\":\"2020-01-30T10:11:21\"");
                 assertThat(event).contains("\"roomNumber\":\"12312\"");
                 assertThat(event).contains("\"reservationNumber\":\"1234556\"");
