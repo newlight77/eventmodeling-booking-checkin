@@ -1,4 +1,4 @@
-package com.github.newlight77;
+package com.github.newlight77.uc.availability;
 
 import com.github.newlight77.uc.availability.RoomAvailabilityHandler;
 import com.github.newlight77.uc.checkin.CheckinCommand;

@@ -1,4 +1,4 @@
-package com.github.newlight77;
+package com.github.newlight77.uc.checkin;
 
 import com.github.newlight77.uc.checkin.CheckinCommand;
 import com.github.newlight77.uc.checkin.CheckinRoomHandler;
