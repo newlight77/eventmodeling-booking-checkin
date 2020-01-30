@@ -1,8 +1,6 @@
 package com.github.newlight77;
 
 import com.github.newlight77.specification.Beha4j;
-import org.assertj.core.api.AbstractStringAssert;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -38,6 +36,7 @@ public class RoomCheckinTest {
                 assertThat(event).contains("\"reservationNumber\":\"1234556\"");
                 assertThat(event).contains("\"badgeNumber\":\"12345\"");
                 assertThat(event).contains("\"customerName\":\"Jane Jackson\"");
-            });
+            })
+        .print();
     }
 }
