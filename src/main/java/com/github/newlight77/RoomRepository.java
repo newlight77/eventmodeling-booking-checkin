@@ -14,4 +14,8 @@ public class RoomRepository {
         new RoomFileBased().writeJson(json);
     }
 
+    public String getAll() {
+        return new RoomFileBased().readJson().toString();
+    }
+
 }
