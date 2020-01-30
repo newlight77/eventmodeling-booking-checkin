@@ -1,8 +1,13 @@
 package com.github.newlight77;
 
-import com.github.newlight77.database.RoomsFileDatabase;
+import com.github.newlight77.uc.availability.RoomAvailabilityHandler;
+import com.github.newlight77.uc.checkin.CheckinCommand;
+import com.github.newlight77.uc.checkin.CheckinRoomHandler;
+import com.github.newlight77.repository.database.RoomsFileDatabase;
 import com.github.newlight77.model.Room;
-import com.github.newlight77.database.Rooms;
+import com.github.newlight77.repository.database.Rooms;
+import com.github.newlight77.repository.RoomReadRepository;
+import com.github.newlight77.repository.RoomWriteRepository;
 import com.github.newlight77.specification.Beha4j;
 import org.junit.Test;
 

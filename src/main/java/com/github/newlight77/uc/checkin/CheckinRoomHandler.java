@@ -1,4 +1,6 @@
-package com.github.newlight77;
+package com.github.newlight77.uc.checkin;
+
+import com.github.newlight77.repository.RoomWriteRepository;
 
 public class CheckinRoomHandler {
 

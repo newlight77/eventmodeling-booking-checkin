@@ -1,4 +1,4 @@
-package com.github.newlight77.database;
+package com.github.newlight77.repository.database;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

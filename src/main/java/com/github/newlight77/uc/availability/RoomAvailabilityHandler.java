@@ -1,7 +1,8 @@
-package com.github.newlight77;
+package com.github.newlight77.uc.availability;
 
 import com.github.newlight77.events.EventListener;
 import com.github.newlight77.model.Room;
+import com.github.newlight77.repository.RoomReadRepository;
 
 import java.util.List;
 

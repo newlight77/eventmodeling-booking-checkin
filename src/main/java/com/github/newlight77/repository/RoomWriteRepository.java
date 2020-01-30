@@ -1,6 +1,7 @@
-package com.github.newlight77;
+package com.github.newlight77.repository;
 
-import com.github.newlight77.database.RoomsFileDatabase;
+import com.github.newlight77.uc.checkin.RoomCheckinCompleted;
+import com.github.newlight77.repository.database.RoomsFileDatabase;
 import org.json.simple.JSONObject;
 
 public class RoomWriteRepository {

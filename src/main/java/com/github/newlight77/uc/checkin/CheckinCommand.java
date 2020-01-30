@@ -1,4 +1,4 @@
-package com.github.newlight77;
+package com.github.newlight77.uc.checkin;
 
 import lombok.Builder;
 import lombok.Data;
