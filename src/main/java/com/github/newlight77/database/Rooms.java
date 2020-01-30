@@ -1,4 +1,4 @@
-package com.github.newlight77.model;
+package com.github.newlight77.database;
 
 import com.github.newlight77.model.Room;
 

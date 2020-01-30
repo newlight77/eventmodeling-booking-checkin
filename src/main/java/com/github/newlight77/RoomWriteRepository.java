@@ -1,6 +1,6 @@
 package com.github.newlight77;
 
-import com.github.newlight77.events.EventBus;
+import com.github.newlight77.database.RoomsFileDatabase;
 import org.json.simple.JSONObject;
 
 public class RoomWriteRepository {

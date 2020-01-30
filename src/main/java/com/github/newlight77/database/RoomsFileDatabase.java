@@ -1,6 +1,5 @@
-package com.github.newlight77;
+package com.github.newlight77.database;
 
-import com.github.newlight77.model.Rooms;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

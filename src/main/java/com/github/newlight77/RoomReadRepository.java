@@ -1,7 +1,8 @@
 package com.github.newlight77;
 
+import com.github.newlight77.database.RoomsFileDatabase;
 import com.github.newlight77.model.Room;
-import com.github.newlight77.model.Rooms;
+import com.github.newlight77.database.Rooms;
 
 import java.util.List;
 
