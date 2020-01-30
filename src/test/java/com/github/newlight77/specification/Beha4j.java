@@ -7,10 +7,21 @@ public class Beha4j {
     return new Beha4j();
   }
   
-  public Given given(final String name, Given given) {
+  public Beha4j given(final String name, Given given) {
     System.out.println("Given : " + name);
     given.execute(name);
-    return given;
+    return this;
   }
-  
+
+  public Beha4j when(final String name, final When when) {
+    System.out.println("When " + name);
+    when.execute(name);
+    return this;
+  }
+
+  public Beha4j then(final String name, final Then then) {
+    System.out.println("Then " + name);
+    then.execute(name);
+    return this;
+  }
 }
