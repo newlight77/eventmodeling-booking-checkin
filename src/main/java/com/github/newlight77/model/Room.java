@@ -8,6 +8,6 @@ import lombok.Data;
 public class Room {
     private String roomNumber;
     private String type;
-    private boolean occupied;
+    private boolean available;
 
 }

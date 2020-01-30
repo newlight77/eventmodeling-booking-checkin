@@ -1,11 +1,12 @@
 package com.github.newlight77.uc.availability;
 
+import com.github.newlight77.events.EventStore;
+import com.github.newlight77.repository.RoomWriteRepository;
 import com.github.newlight77.uc.checkin.CheckinCommand;
 import com.github.newlight77.uc.checkin.CheckinRoomHandler;
-import com.github.newlight77.repository.database.RoomsFileDatabase;
+import com.github.newlight77.repository.database.HotelDatabase;
 import com.github.newlight77.model.Room;
 import com.github.newlight77.repository.RoomReadRepository;
-import com.github.newlight77.repository.RoomWriteRepository;
 import com.github.newlight77.specification.Beha4j;
 import org.junit.Test;
 
@@ -13,13 +14,14 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RoomAvailabilityHandlerTest {
+public class RoomAvailabilityProcessorTest {
 
-    final RoomsFileDatabase database = new RoomsFileDatabase(4);
+    final EventStore eventStore = new EventStore();
+    final HotelDatabase database = new HotelDatabase(4);
     final RoomReadRepository readRepository = new RoomReadRepository(database);
     final RoomWriteRepository writeRepository = new RoomWriteRepository(database);
-    final RoomAvailabilityHandler availabilityHandler = new RoomAvailabilityHandler(readRepository);
-    final CheckinRoomHandler checkinHandler = new CheckinRoomHandler(writeRepository);
+    final RoomAvailabilityProcessor availabilityHandler = new RoomAvailabilityProcessor(readRepository, writeRepository, eventStore);
+    final CheckinRoomHandler checkinHandler = new CheckinRoomHandler(eventStore);
 
     @Test
     public void should_return_all_rooms_are_available_when_hotel_just_opened() {
@@ -29,7 +31,7 @@ public class RoomAvailabilityHandlerTest {
     @Test
     public void should_return_no_available_rooms_when_hotel_just_opened() {
         for (Room room : database.getRooms()) {
-            room.setOccupied(true);
+            room.setAvailable(false);
         }
         assertThat(availabilityHandler.availableRooms()).isEmpty();
     }

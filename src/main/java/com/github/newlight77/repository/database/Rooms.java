@@ -11,7 +11,7 @@ class Rooms {
         for (int i = 1 ; i <= roomsCount ; i++) {
             String roomNumber = String.valueOf(i);
             rooms.put(roomNumber, Room.builder() //
-                    .occupied(false) //
+                    .available(true) //
                     .roomNumber(roomNumber) //
                     .type("Double") //
                     .build()

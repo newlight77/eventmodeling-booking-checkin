@@ -1,6 +1,8 @@
 package com.github.newlight77.events;
 
+import org.json.simple.JSONObject;
+
 public interface EventListener {
 
-    void onEvent(String json);
+    void onEvent(JSONObject event);
 }

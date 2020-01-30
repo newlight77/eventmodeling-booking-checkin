@@ -1,6 +1,5 @@
-package com.github.newlight77.repository.database;
+package com.github.newlight77.events;
 
-import com.github.newlight77.model.Room;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,25 +10,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RoomsFileDatabase {
+public class EventStore {
 
     private String pathname = "./tmp/events/checkin/";
-    private Rooms rooms;
+    private List<EventListener> listeners = new ArrayList<>();
 
-    public RoomsFileDatabase() {
-        this(5);
-    }
-    public RoomsFileDatabase(int roomsCount) {
-        this.rooms = new Rooms(roomsCount);
+    public void register(EventListener listener) {
+        listeners.add(listener);
     }
 
-    public void writeJson(String roomNumber, JSONObject json) {
+    public void eventFired(JSONObject json) {
+        this.storeEvent(json);
+        this.notifyListeners(json);
+    }
+
+    private void storeEvent(JSONObject json) {
         FileWriter writer = null;
         try {
             new File(pathname).mkdirs();
-            writer = new FileWriter("./tmp/events/checkin/rooms-" + roomNumber + ".json");
+            writer = new FileWriter("./tmp/events/checkin/rooms.json");
             writer.write(json.toJSONString());
             writer.close();
         } catch (IOException e) {
@@ -48,7 +50,9 @@ public class RoomsFileDatabase {
         return "error reading from file";
     }
 
-    public Collection<Room> getRooms() {
-        return rooms.allRooms();
+    private void notifyListeners(JSONObject event) {
+        for (EventListener listener : listeners) {
+            listener.onEvent(event);
+        }
     }
 }

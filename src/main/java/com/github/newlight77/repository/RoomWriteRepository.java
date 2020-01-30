@@ -1,23 +1,23 @@
 package com.github.newlight77.repository;
 
-import com.github.newlight77.uc.checkin.RoomCheckinCompleted;
-import com.github.newlight77.repository.database.RoomsFileDatabase;
-import org.json.simple.JSONObject;
+import com.github.newlight77.model.Room;
+import com.github.newlight77.repository.database.HotelDatabase;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class RoomWriteRepository {
 
-    private RoomsFileDatabase database;
-    public RoomWriteRepository(RoomsFileDatabase database) {
+    private HotelDatabase database;
+
+    public RoomWriteRepository(HotelDatabase database) {
         this.database = database;
     }
 
-    public void save(RoomCheckinCompleted event) {
-        JSONObject json = new JSONObject();
-        json.put("customerName", event.getCustomerName());
-        json.put("badgeNumber", event.getBadgeNumber());
-        json.put("checkinTime", event.getCheckinTime());
-        json.put("roomNumber", event.getRoomNumber());
-        json.put("reservationNumber", event.getReservationNumber());
-        database.writeJson(event.getRoomNumber(), json);
+    public void updateRoomAvailability(String roomNumber, boolean available) {
+        database.getRooms().stream()
+                .filter(r -> r.getRoomNumber().equals(roomNumber))
+                .forEach(r -> r.setAvailable(available));
     }
 }
