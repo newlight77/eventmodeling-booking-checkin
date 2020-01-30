@@ -13,13 +13,11 @@ public class RoomAvailabilityProcessor implements EventListener {
 
     private RoomWriteRepository roomWriteRepository;
     private RoomReadRepository roomReadRepository;
-    private EventStore eventStore;
 
     public RoomAvailabilityProcessor(RoomReadRepository roomReadRepository, RoomWriteRepository roomWriteRepository, EventStore eventStore) {
         this.roomReadRepository = roomReadRepository;
         this.roomWriteRepository = roomWriteRepository;
-        this.eventStore = eventStore;
-        this.eventStore.register(this);
+        eventStore.register(this);
     }
 
     public List<Room> availableRooms() {
@@ -29,7 +27,6 @@ public class RoomAvailabilityProcessor implements EventListener {
     @Override
     public void onEvent(JSONObject event) {
         if (event.containsKey("checkinTime")) {
-            System.out.println("there is a checkin");
             this.roomWriteRepository.updateRoomAvailability(event.get("roomNumber").toString(), false);
         }
     }
