@@ -1,5 +1,6 @@
 package com.github.newlight77.repository.database;
 
+import com.github.newlight77.model.Room;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -10,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 
 public class RoomsFileDatabase {
 
@@ -17,10 +19,10 @@ public class RoomsFileDatabase {
     private Rooms rooms;
 
     public RoomsFileDatabase() {
-        this(new Rooms(5));
+        this(5);
     }
-    public RoomsFileDatabase(Rooms rooms) {
-        this.rooms = rooms;
+    public RoomsFileDatabase(int roomsCount) {
+        this.rooms = new Rooms(roomsCount);
     }
 
     public void writeJson(String roomNumber, JSONObject json) {
@@ -46,7 +48,7 @@ public class RoomsFileDatabase {
         return "error reading from file";
     }
 
-    public Rooms getRooms() {
-        return rooms;
+    public Collection<Room> getRooms() {
+        return rooms.allRooms();
     }
 }

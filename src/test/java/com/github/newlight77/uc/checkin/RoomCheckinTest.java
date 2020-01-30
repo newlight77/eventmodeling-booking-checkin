@@ -25,7 +25,7 @@ public class RoomCheckinTest {
 
         Beha4j
             .scenario("should_process_room_checkin_event")
-            .given("a custommer named Jane Jackson", name -> {
+            .given("a customer named Jane Jackson", name -> {
                 builder
                         .customerName("Jane Jackson")
                         .checkinTime(LocalDateTime.of(2020, 1, 30, 10, 11, 21))

@@ -4,12 +4,9 @@ import com.github.newlight77.model.Room;
 
 import java.util.*;
 
-public class Rooms {
+class Rooms {
 
     private Map<String, Room> rooms = new HashMap<>();
-    public Rooms() {
-        this(10);
-    }
     public Rooms(int roomsCount) {
         for (int i = 1 ; i <= roomsCount ; i++) {
             String roomNumber = String.valueOf(i);

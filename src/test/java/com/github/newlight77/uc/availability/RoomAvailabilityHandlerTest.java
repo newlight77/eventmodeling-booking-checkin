@@ -1,11 +1,9 @@
 package com.github.newlight77.uc.availability;
 
-import com.github.newlight77.uc.availability.RoomAvailabilityHandler;
 import com.github.newlight77.uc.checkin.CheckinCommand;
 import com.github.newlight77.uc.checkin.CheckinRoomHandler;
 import com.github.newlight77.repository.database.RoomsFileDatabase;
 import com.github.newlight77.model.Room;
-import com.github.newlight77.repository.database.Rooms;
 import com.github.newlight77.repository.RoomReadRepository;
 import com.github.newlight77.repository.RoomWriteRepository;
 import com.github.newlight77.specification.Beha4j;
@@ -17,24 +15,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoomAvailabilityHandlerTest {
 
-    private Rooms rooms = new Rooms(4);
-    final RoomsFileDatabase database = new RoomsFileDatabase(rooms);
+    final RoomsFileDatabase database = new RoomsFileDatabase(4);
     final RoomReadRepository readRepository = new RoomReadRepository(database);
-    final RoomAvailabilityHandler handler = new RoomAvailabilityHandler(readRepository);
     final RoomWriteRepository writeRepository = new RoomWriteRepository(database);
+    final RoomAvailabilityHandler availabilityHandler = new RoomAvailabilityHandler(readRepository);
     final CheckinRoomHandler checkinHandler = new CheckinRoomHandler(writeRepository);
 
     @Test
     public void should_return_all_rooms_are_available_when_hotel_just_opened() {
-        assertThat(handler.availableRooms()).hasSize(4);
+        assertThat(availabilityHandler.availableRooms()).hasSize(4);
     }
 
     @Test
     public void should_return_no_available_rooms_when_hotel_just_opened() {
-        for (Room room : rooms.allRooms()) {
+        for (Room room : database.getRooms()) {
             room.setOccupied(true);
         }
-        assertThat(handler.availableRooms()).isEmpty();
+        assertThat(availabilityHandler.availableRooms()).isEmpty();
     }
 
     @Test
@@ -54,7 +51,7 @@ public class RoomAvailabilityHandlerTest {
                     checkinHandler.checkin(builder.build());
                 })
                 .then("there are only 3 rooms available", name -> {
-                    assertThat(handler.availableRooms()).hasSize(3);
+                    assertThat(availabilityHandler.availableRooms()).hasSize(3);
                 })
                 .print();
     }
