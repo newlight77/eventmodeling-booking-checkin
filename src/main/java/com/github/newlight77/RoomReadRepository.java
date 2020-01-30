@@ -4,26 +4,24 @@ import com.github.newlight77.model.Room;
 import com.github.newlight77.model.Rooms;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class RoomReadRepository {
 
-    private Rooms rooms;
+    private RoomsFileDatabase database;
 
-    public RoomReadRepository(Rooms rooms) {
-        this.rooms = rooms;
-    }
-    public RoomReadRepository() {
-        this(new Rooms());
+    public RoomReadRepository(RoomsFileDatabase database) {
+        this.database = database;
     }
     public String getCheckin(String roomNumber) {
-        return new RoomFileBased().readJson(roomNumber).toString();
+        return database.readJson(roomNumber).toString();
     }
 
     public List<Room> getAvailableRooms() {
+        Rooms rooms = database.getRooms();
         return rooms.allRooms().stream()
                 .filter(r -> !r.isOccupied())
-                .collect(Collectors.toList());
+                .collect(toList());
     }
-
 }

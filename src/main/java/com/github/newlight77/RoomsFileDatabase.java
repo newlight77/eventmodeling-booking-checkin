@@ -1,5 +1,6 @@
 package com.github.newlight77;
 
+import com.github.newlight77.model.Rooms;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,9 +12,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class RoomFileBased {
+public class RoomsFileDatabase {
 
     private String pathname = "./tmp/events/checkin/";
+    private Rooms rooms;
+
+    public RoomsFileDatabase() {
+        this(new Rooms(5));
+    }
+    public RoomsFileDatabase(Rooms rooms) {
+        this.rooms = rooms;
+    }
+
     public void writeJson(String roomNumber, JSONObject json) {
         FileWriter writer = null;
         try {
@@ -35,5 +45,9 @@ public class RoomFileBased {
         }
 
         return "error reading from file";
+    }
+
+    public Rooms getRooms() {
+        return rooms;
     }
 }

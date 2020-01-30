@@ -1,5 +1,6 @@
 package com.github.newlight77;
 
+import com.github.newlight77.events.EventBus;
 import com.github.newlight77.specification.Beha4j;
 import org.junit.Test;
 
@@ -12,9 +13,10 @@ public class RoomCheckinTest {
     @Test
     public void should_process_room_checkin_event() {
 
+        final RoomsFileDatabase database = new RoomsFileDatabase();
         final CheckinCommand.CheckinCommandBuilder builder = CheckinCommand.builder();
-        final RoomWriteRepository writeRepository = new RoomWriteRepository();
-        final RoomReadRepository readRepository = new RoomReadRepository();
+        final RoomWriteRepository writeRepository = new RoomWriteRepository(database);
+        final RoomReadRepository readRepository = new RoomReadRepository(database);
         final CheckinRoomHandler handler = new CheckinRoomHandler(writeRepository);
 
         Beha4j
