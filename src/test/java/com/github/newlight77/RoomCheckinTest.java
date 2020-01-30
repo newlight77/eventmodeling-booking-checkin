@@ -1,6 +1,6 @@
 package com.github.newlight77;
 
-import com.sck2.beha4j.Beha4j;
+import com.github.newlight77.specification.Beha4j;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 

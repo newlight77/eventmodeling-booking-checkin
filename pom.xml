@@ -30,12 +30,6 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.10.2</version>
 		</dependency>
-		<dependency>
-			<groupId>com.sck2</groupId>
-			<artifactId>beha4j</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
