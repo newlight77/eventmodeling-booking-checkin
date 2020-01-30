@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class RoomCheckinCompleted {
     private String customerName;
-    private LocalDateTime checkinTime;
+    private String checkinTime;
     private String roomNumber;
     private String badgeNumber;
     private String reservationNumber;

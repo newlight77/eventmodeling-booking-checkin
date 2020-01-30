@@ -11,7 +11,7 @@ public class CheckinRoomHandler {
     public void checkin(CheckinCommand command) {
         RoomCheckinCompleted event = RoomCheckinCompleted.builder()
                 .customerName(command.getCustomerName())
-                .checkinTime(command.getCheckinTime())
+                .checkinTime(command.getCheckinTime().toString())
                 .roomNumber(command.getRoomNumber())
                 .badgeNumber(command.getBadgeNumber())
                 .reservationNumber(command.getReservationNumber())

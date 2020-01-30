@@ -8,30 +8,30 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class RoomFileBased {
 
     public void writeJson(JSONObject json) {
+        FileWriter writer = null;
         try {
-            FileWriter writer = new FileWriter("room.json");
+            writer = new FileWriter("room.json");
             writer.write(json.toJSONString());
+            writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     public String readJson() {
         FileReader reader = null;
         try {
-            reader = new FileReader("room.json");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            return new JSONParser().parse(reader).toString();
+            String json = Files.readString(Paths.get("room.json"));
+            return new JSONParser().parse(json).toString();
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+
         return "error reading from file";
     }
 }

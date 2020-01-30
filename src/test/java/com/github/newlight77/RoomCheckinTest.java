@@ -20,7 +20,7 @@ public class RoomCheckinTest {
             .given("there is a list with 3 string", name -> {
                 builder
                         .customerName("Jane Jackson")
-                        .checkinTime(LocalDateTime.now())
+                        .checkinTime(LocalDateTime.of(2020, 1, 30, 10, 11, 21))
                         .badgeNumber("12345")
                         .reservationNumber("1234556")
                         .roomNumber("12312");
@@ -29,7 +29,8 @@ public class RoomCheckinTest {
                 handler.checkin(builder.build());
             })
             .then("this resulting list has 5 strings", name -> {
-                Assertions.assertThat(repo.getAll()).isEqualTo("");
+                String expectedJson = "{\"checkinTime\":\"2020-01-30T10:11:21\",\"roomNumber\":\"12312\",\"reservationNumber\":\"1234556\",\"badgeNumber\":\"12345\",\"customerName\":\"Jane Jackson\"}";
+                Assertions.assertThat(repo.getAll()).isEqualTo(expectedJson);
             });
     }
 }
