@@ -1,10 +1,13 @@
 package com.github.newlight77;
 
 import com.github.newlight77.specification.Beha4j;
+import org.assertj.core.api.AbstractStringAssert;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoomCheckinTest {
 
@@ -17,7 +20,7 @@ public class RoomCheckinTest {
 
         Beha4j
             .scenario("should_process_room_checkin_event")
-            .given("there is a list with 3 string", name -> {
+            .given("a custommer named Jane Jackson", name -> {
                 builder
                         .customerName("Jane Jackson")
                         .checkinTime(LocalDateTime.of(2020, 1, 30, 10, 11, 21))
@@ -25,12 +28,16 @@ public class RoomCheckinTest {
                         .reservationNumber("1234556")
                         .roomNumber("12312");
             })
-            .when("the 2 lists are merged", name -> {
+            .when("Jane Jackson books a room in our hotel", name -> {
                 handler.checkin(builder.build());
             })
-            .then("this resulting list has 5 strings", name -> {
-                String expectedJson = "{\"checkinTime\":\"2020-01-30T10:11:21\",\"roomNumber\":\"12312\",\"reservationNumber\":\"1234556\",\"badgeNumber\":\"12345\",\"customerName\":\"Jane Jackson\"}";
-                Assertions.assertThat(repo.getAll()).isEqualTo(expectedJson);
+            .then("a booking event is created", name -> {
+                String event = repo.getAll();
+                assertThat(event).contains("\"checkinTime\":\"2020-01-30T10:11:21\"");
+                assertThat(event).contains("\"roomNumber\":\"12312\"");
+                assertThat(event).contains("\"reservationNumber\":\"1234556\"");
+                assertThat(event).contains("\"badgeNumber\":\"12345\"");
+                assertThat(event).contains("\"customerName\":\"Jane Jackson\"");
             });
     }
 }
