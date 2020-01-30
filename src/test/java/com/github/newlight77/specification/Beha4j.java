@@ -8,6 +8,7 @@ public class Beha4j {
   }
   
   public Given given(final String name, Given given) {
+    System.out.println("Given : " + name);
     given.execute(name);
     return given;
   }
