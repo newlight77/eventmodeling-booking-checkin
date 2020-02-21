@@ -1,32 +1,23 @@
 package com.github.newlight77.uc.checkin;
 
-import com.github.newlight77.events.EventStore;
-import org.json.simple.JSONObject;
+import com.github.newlight77.infrastructure.adapters.RoomWriteRepository;
+import com.github.newlight77.ports.IRoomReadRepository;
+import com.github.newlight77.ports.IRoomWriteRepository;
 
 public class CheckinRoomHandler {
 
-    private EventStore eventStore;
+    private IRoomWriteRepository roomWriteRepository;
+    private IRoomReadRepository roomReadRepository;
 
-    public CheckinRoomHandler(EventStore eventStore) {
-        this.eventStore = eventStore;
+    public CheckinRoomHandler(RoomWriteRepository roomWriteRepository, IRoomReadRepository roomReadRepository) {
+        this.roomWriteRepository = roomWriteRepository;
+        this.roomReadRepository = roomReadRepository;
     }
 
     public void checkin(CheckinCommand command) {
-        RoomCheckinCompleted event = RoomCheckinCompleted.builder()
-                .customerName(command.getCustomerName())
-                .checkinTime(command.getCheckinTime().toString())
-                .roomNumber(command.getRoomNumber())
-                .badgeNumber(command.getBadgeNumber())
-                .reservationNumber(command.getReservationNumber())
-                .build();
-
-        JSONObject json = new JSONObject();
-        json.put("customerName", event.getCustomerName());
-        json.put("badgeNumber", event.getBadgeNumber());
-        json.put("checkinTime", event.getCheckinTime());
-        json.put("roomNumber", event.getRoomNumber());
-        json.put("reservationNumber", event.getReservationNumber());
-
-        eventStore.eventFired(json);
+        if (!roomReadRepository.isAvailable(command.getRoomNumber())) {
+            throw new IllegalStateException();
+        }
+        roomWriteRepository.checkin(command.toEvent());
     }
 }

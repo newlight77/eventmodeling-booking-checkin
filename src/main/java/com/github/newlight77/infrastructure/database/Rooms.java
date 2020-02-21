@@ -1,8 +1,10 @@
-package com.github.newlight77.repository.database;
+package com.github.newlight77.infrastructure.database;
 
 import com.github.newlight77.model.Room;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 class Rooms {
 
